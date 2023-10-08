@@ -11,6 +11,7 @@ import com.example.bhp.R
 import com.example.bhp.databinding.ActivityMainBinding
 import com.example.bhp.network.MyViewModelFactory
 import com.example.bhp.network.Repo
+import com.example.bhp.ui.model.RequestPredectHomePrice
 import com.example.bhp.ui.viewmodel.HomeViewModel
 import com.google.android.material.textfield.TextInputEditText
 
@@ -38,7 +39,12 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnEstimatePrice.setOnClickListener(View.OnClickListener {
 
-           // viewModel.predict_home_price()
+            var params= RequestPredectHomePrice(binding.tietArea.toString(),
+                binding.spBHK.selectedItem as String?, binding.spLocation.selectedItem as String?,
+                binding.spBath.selectedItem as String?)
+            viewModel.predict_home_price(params).observe(this){
+                binding.tvEstimatedPrice.text="Estimated Price: ${it.estimatedPrice}"
+            }
         })
 
 
@@ -66,8 +72,8 @@ class MainActivity : AppCompatActivity() {
             binding.spLocation.adapter = adapterLocation
         }
 
-        viewModel.responsePrice.observe(this){
+        /*viewModel.responsePrice.observe(this){
             binding.tvEstimatedPrice.text="Estimated Price: ${it.estimatedPrice}"
-        }
+        }*/
     }
 }

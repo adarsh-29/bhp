@@ -21,7 +21,7 @@ class HomeViewModel constructor(private val repository: Repo, var context: Conte
     val responsePrice = MutableLiveData<ResponsePredectHomePrice>()
     var responseGetLocations = MutableLiveData<ResponseGetLocations>()
 
-    fun predict_home_price(bodyParam : RequestPredectHomePrice){
+    fun predict_home_price(bodyParam : RequestPredectHomePrice): MutableLiveData<ResponsePredectHomePrice>{
        // Utility.showLoader(context)
         val param : String = Gson().toJson(bodyParam)
         Log.d("request:", "request_price_pred: $param")
@@ -41,9 +41,11 @@ class HomeViewModel constructor(private val repository: Repo, var context: Conte
                 Toast.makeText(context,t.message, Toast.LENGTH_SHORT).show()
             }
         })
+
+        return responsePrice
     }
 
-    fun get_location_names()  {
+    fun get_location_names() {
 
         val call= repository.get_location_names()
         // Utility.showLoader(context)
