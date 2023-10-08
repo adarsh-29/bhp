@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun bindData() {
 
-        val itemList = listOf("1", "2", "3", "4")
+        val itemList = listOf("1", "2", "3", "4" )
 
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, itemList)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
